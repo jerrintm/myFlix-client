@@ -27395,7 +27395,7 @@ const MainView = ()=>{
         {
             id: 1,
             title: "The Dark Knight",
-            image: "https://example.com/dark_knight.jpg",
+            image: "https://images.app.goo.gl/xBF4RYrfSXtnSoxG8",
             director: "Christopher Nolan"
         },
         {
@@ -27459,7 +27459,7 @@ const MainView = ()=>{
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "iXetA5Mx7ypy2zMF3mdnIWWw898=");
+_s(MainView, "ZP2s3WNyjrV4F7Nbe2veZk6ZHeI=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27603,10 +27603,13 @@ const MovieView = ({ movie, onBackClick })=>{
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: ()=>{
+                    onBackClick();
+                },
                 children: "Back"
             }, void 0, false, {
                 fileName: "src/components/movie-view/movie-view.jsx",
-                lineNumber: 15,
+                lineNumber: 16,
                 columnNumber: 13
             }, undefined)
         ]
