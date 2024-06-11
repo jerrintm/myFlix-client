@@ -13,7 +13,7 @@ export const MainView = () => {
             id: 1,
             title: "The Dark Knight",
             image:
-                "https://example.com/dark_knight.jpg",
+                "https://images.app.goo.gl/xBF4RYrfSXtnSoxG8",
             director: "Christopher Nolan"
         },
         {
