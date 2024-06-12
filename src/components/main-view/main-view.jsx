@@ -1,14 +1,19 @@
 
-import { useState } from "react";   //useState() function (imported from React) is an empty array
+import { useState, useEffect } from "react";   //useState() function (imported from React) is an empty array
 
 import { MovieCard } from "../movie-card/movie-card";  //to import the BookCard which is child of main-view
 
 import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-    // sets the books variable with the current value of the usestate()
+
+
+    // sets the movies variable with the current value of the usestate()
+
+    /*
     const [movies, setMovies] = useState([
 
+        
         {
             id: 1,
             title: "The Dark Knight",
@@ -38,18 +43,23 @@ export const MainView = () => {
             director: "Quentin Tarantino"
         }
     ]);
+*/
 
-
-
-    // { id: 1, title: "Eloquent JavaScript" },
-    // { id: 2, title: "Mastering JavaScript Functional Programming" },
-    // { id: 3, title: "JavaScript: The Good Parts" },
-    // { id: 4, title: "JavaScript: The Definitive Guide" },
-    // { id: 5, title: "The Road to React" }
-    //]);
+    const [movies, setMovies] = useState([]);
 
 
     const [selectedMovie, setSelectedMovie] = useState(null);   // To determine whether to render a specific part of the UI (BookView) in the MainView component, a new state (selectedBook) is used as a flag.
+
+    useEffect(() => {
+        fetch("https://myflix12-47ea37fcfdd6.herokuapp.com/")
+            .then((response) => response.json())
+            .then(movies => {
+                setMovies(movies)
+            })
+            .catch(e => console.log(e))
+
+    }, []);
+
 
     if (selectedMovie) {
         return (

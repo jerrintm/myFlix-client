@@ -27390,46 +27390,53 @@ var _movieView = require("../movie-view/movie-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    // sets the books variable with the current value of the usestate()
-    const [movies, setMovies] = (0, _react.useState)([
+    // sets the movies variable with the current value of the usestate()
+    /*
+    const [movies, setMovies] = useState([
+
+        
         {
             id: 1,
             title: "The Dark Knight",
-            image: "https://www.cartoonbucket.com/wp-content/uploads/2016/07/Image-Of-Batman-1-600x300.jpg",
+            image:
+                "https://www.cartoonbucket.com/wp-content/uploads/2016/07/Image-Of-Batman-1-600x300.jpg",
             director: "Christopher Nolan"
         },
         {
             id: 2,
             title: "The Godfather",
-            image: "https://example.com/godfather.jpg",
+            image:
+                "https://example.com/godfather.jpg",
             director: "Federico Kereki"
         },
         {
             id: 3,
             title: "Inception",
-            image: "https://example.com/inception.jpg",
+            image:
+                "https://example.com/inception.jpg",
             director: "James Cameron"
         },
         {
             id: 4,
             title: "Pulp Fiction",
-            image: "https://example.com/pulp_fiction.jpg",
+            image:
+                "https://example.com/pulp_fiction.jpg",
             director: "Quentin Tarantino"
         }
     ]);
-    // { id: 1, title: "Eloquent JavaScript" },
-    // { id: 2, title: "Mastering JavaScript Functional Programming" },
-    // { id: 3, title: "JavaScript: The Good Parts" },
-    // { id: 4, title: "JavaScript: The Definitive Guide" },
-    // { id: 5, title: "The Road to React" }
-    //]);
+*/ const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null); // To determine whether to render a specific part of the UI (BookView) in the MainView component, a new state (selectedBook) is used as a flag.
+    (0, _react.useEffect)(()=>{
+        fetch("https://myflix12-47ea37fcfdd6.herokuapp.com/").then((response)=>response.json()).then((movies)=>{
+            setMovies(movies);
+        }).catch((e)=>console.log(e));
+    }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 56,
+        lineNumber: 66,
         columnNumber: 13
     }, undefined);
     //if books variable is empty, below code would display it as empty
@@ -27437,7 +27444,7 @@ const MainView = ()=>{
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 62,
+        lineNumber: 72,
         columnNumber: 16
     }, undefined);
     // The map() method below in the code just maps each element in the books array to a piece of UI. So, after its execution, you have one <div>{book.title}</div> for each book 
@@ -27450,16 +27457,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 72,
+                lineNumber: 82,
                 columnNumber: 17
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 68,
+        lineNumber: 78,
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "cGcFGoGIQKut3QheKoj46uETgp8=");
+_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
