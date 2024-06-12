@@ -13,7 +13,7 @@ export const MainView = () => {
             id: 1,
             title: "The Dark Knight",
             image:
-                "https://images.app.goo.gl/xBF4RYrfSXtnSoxG8",
+                "https://www.cartoonbucket.com/wp-content/uploads/2016/07/Image-Of-Batman-1-600x300.jpg",
             director: "Christopher Nolan"
         },
         {
