@@ -27395,7 +27395,7 @@ const MainView = ()=>{
         {
             id: 1,
             title: "The Dark Knight",
-            image: "https://images.app.goo.gl/xBF4RYrfSXtnSoxG8",
+            image: "https://www.cartoonbucket.com/wp-content/uploads/2016/07/Image-Of-Batman-1-600x300.jpg",
             director: "Christopher Nolan"
         },
         {
@@ -27459,7 +27459,7 @@ const MainView = ()=>{
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "ZP2s3WNyjrV4F7Nbe2veZk6ZHeI=");
+_s(MainView, "cGcFGoGIQKut3QheKoj46uETgp8=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
