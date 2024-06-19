@@ -9,9 +9,14 @@ import { LoginView } from "../login-view/login-view";
 
 import { SignupView } from "../signup-view/signup-view";
 
-import { Row, Col } from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+import Row from "react-bootstrap/Row";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import { ProfileView } from "../profile-view/profile-view";
+
 
 export const MainView = () => {
 
@@ -138,62 +143,73 @@ if (movies.length === 0) {
 // The map() method below in the code just maps each element in the books array to a piece of UI. So, after its execution, you have one <div>{book.title}</div> for each book 
 return (
 
-    <Row>
-        <Routes>
-            <Route path="/login" element={
-                <>
-                    {!user ? (
-                        <LoginView onLoggedIn={(user, token) => {
-                            console.log(user);
-                            localStorage.setItem("user", user);
-                            setUser(user);
-                            //setToken(token);
-                        }} />
-                    ) : (
-                        <Navigate to="/" />
-                    )}
-                </>
-            }>
-            </Route>
-            <Route path="/signup" element={
-                <>
-                    <SignupView />
-                </>
-            }>
-            </Route>
-            <Route path="/" element={
-                <>
-                    {!user ? (
-                        <Navigate to="/login" replace />
-                    ) : (<>
-                        {
-                            movies.map((movie) => (
-                                <Col className='md5'>
-                                    <MovieCard
-                                        key={movie._id}
-                                        movie={movie}
-                                        onMovieClick={(newSelectedMovie) => {
-                                            setSelectedMovie(newSelectedMovie);
-                                        }}
-                                    />
-                                </Col>
-                            ))}
+    <BrowserRouter>
+        <Row>
+            <Routes>
+                <Route path="/login" element={
+                    <>
+                        <NavBar></NavBar>
+                        {!user ? (
+                            <LoginView onLoggedIn={(user, token) => {
+                                // console.log(user);
+                                // localStorage.setItem("user", user);
+                                setUser(user);
+                                //setToken(token);
+                            }} />
+                        ) : (
+                            <Navigate to="/" />
+                        )}
                     </>
-                    )}
-                </>
-            }>
-            </Route>
-            <Route path="/movies/:movieId" element={
-                <>
-                    {!user ? (
-                        <Navigate to="/login" replace />
-                    ) : (
-                        <MovieView movies={movies} onBackClick={() => setSelectedMovie(null)} />
-                    )}
-                </>
-            }>
-            </Route>
-            {/* {movies.map((movie) => (
+                }>
+                </Route>
+                <Route path="/signup" element={
+                    <>
+                        <NavBar></NavBar>
+                        <SignupView />
+                    </>
+                }>
+                </Route>
+                <Route path="/" element={
+                    <>
+                        <NavBar></NavBar>
+                        {!user ? (
+                            <Navigate to="/login" replace />
+                        ) : (<>
+                            {
+                                movies.map((movie) => (
+                                    <Col className='md5'>
+                                        <MovieCard
+                                            key={movie._id}
+                                            movie={movie}
+                                            onMovieClick={(newSelectedMovie) => {
+                                                setSelectedMovie(newSelectedMovie);
+                                            }}
+                                        />
+                                    </Col>
+                                ))}
+                        </>
+                        )}
+                    </>
+                }>
+                </Route>
+                <Route path="/movies/:movieId" element={
+                    <>
+                        <NavBar></NavBar>
+                        {!user ? (
+                            <Navigate to="/login" replace />
+                        ) : (
+                            <MovieView movies={movies} onBackClick={() => setSelectedMovie(null)} />
+                        )}
+                    </>
+                }>
+                </Route>
+                <Route path="/profile" element={
+                    <>
+                        <NavBar></NavBar>
+                        <ProfileView movies={movies} />
+                    </>
+                }></Route>
+                {/* {movies.map((movie) => (
         <Col className = 'md5'>
         <MovieCard
           key={movie._id}
@@ -204,11 +220,11 @@ return (
         />
         </Col>
       ))} */}
-            {/* <button onClick={() => { setUser(null); localStorage.clear(); }}>Logout</button> */}
-        </Routes>
-    </Row>
+                {/* <button onClick={() => { setUser(null); localStorage.clear(); }}>Logout</button> */}
+            </Routes>
+        </Row>
     </BrowserRouter >
-  );
+);
 };
 
 /*

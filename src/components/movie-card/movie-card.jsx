@@ -2,7 +2,42 @@ import PropType from "prop-types";
 
 import { Button, Card, CardBody } from "react-bootstrap";
 
+import { Link } from "react-router-dom";
+
+
 export const MovieCard = ({ movie, onMovieClick }) => {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const addFav = () => {
+        fetch(`https://movie-api-xkkk.onrender.com/users/${user.Username}/${movie._id}`, {
+            "method": "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            }
+        })
+            .then((response) => response.json())
+            .then(movies => {
+                alert("Movie added")
+            })
+            .catch(e => console.log(e))
+    }
+    const removeFav = () => {
+        fetch(`https://movie-api-xkkk.onrender.com/users/${user.Username}/${movie._id}`, {
+            "method": "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            }
+        })
+            .then((response) => response.json())
+            .then(movies => {
+                alert("Movie deleted")
+            })
+            .catch(e => console.log(e))
+    }
+
     return (
 
         /*  <div
@@ -25,12 +60,18 @@ export const MovieCard = ({ movie, onMovieClick }) => {
             <Card.Body>
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Text>{movie.director.Name}</Card.Text>
-                <Button
-                    onClick={() => {
-                        onMovieClick(movie)
-                    }} variant="link">
+                <Link to={`/movies/${movie._id}`}>
                     Open
+                </Link>
+                <Button
+                    onClick={addFav}>
+                    Add to Favorites
                 </Button>
+                <Button onClick={removeFav}>
+                    Remove from Favorites
+                </Button>
+
+
             </Card.Body>
         </Card>
 
