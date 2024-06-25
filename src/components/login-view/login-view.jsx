@@ -1,15 +1,14 @@
-import React from "react";
+import React from "react"
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';;
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-//import { Button, Form } from "react-bootstrap";
+
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
     const handleSubmit = (event) => {
-        // this prevents the default behavior of the form which is to reload the entire page
+        //prevents default form behavior of reloading page
         event.preventDefault();
 
         const data = {
@@ -17,72 +16,56 @@ export const LoginView = ({ onLoggedIn }) => {
             Password: password,
         };
 
-        fetch("https://myflix12-47ea37fcfdd6.herokuapp.com", {
+        fetch("ttps://myflix12-47ea37fcfdd6.herokuapp.com/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((response) => {
-                if (response) {
-                    localStorage.setItem("user", JSON.stringify(response.user));
-                    localStorage.setItem("token", response.token);
-                    onLoggedIn(response.user, response.token);
-                    onLoggedIn(username);
+        }).then((response) => response.json())
+            .then((data) => {
+                if (data.user) {
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                    localStorage.setItem("token", data.token);
+                    onLoggedIn(data.user, data.token);
                 } else {
-                    alert("Login failed");
+                    alert("No such user");
                 }
+            })
+            .catch((e) => {
+                alert("Something went wrong");
             });
     };
-
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formUsername">
-                <Form.Label>
-                    Username:
-                </Form.Label>
+            <Form.Group controlId="formUsername" >
+                <Form.Label>Username:</Form.Label>
                 <Form.Control
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
-                    minLength='4'
+                    minLength="5"
+                    placeholder="Enter a username"
                 />
             </Form.Group>
             <Form.Group controlId="formPassword">
-                <Form.Label>
-                    Password:
-                </Form.Label>
+                <Form.Label>Password:</Form.Label>
                 <Form.Control
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    placeholder="Enter a password"
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
+            <Button
+                variant="primary"
+                type="submit"
+                className="back-button"
+                style={{ cursor: "pointer" }}>
+                Submit
+            </Button>
         </Form>
     );
 };
-
-
-
-/*
-
-export const LoginView = () => {
-    return (
-        <form>
-            <label>
-                Username:
-                <input type="text" />
-            </label>
-            <label>
-                Password:
-                <input type="password" />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
-    );
-};
-
-*/

@@ -1,107 +1,106 @@
-import PropType from "prop-types";
+import PropTypes from 'prop-types';
+import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-import { Button, Card, CardBody } from "react-bootstrap";
+export const MovieCard = ({ movie, updateAction }) => {
+    const [isFavorite, setIsFavorite] = useState(false);
 
-import { Link } from "react-router-dom";
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user && user.FavoriteMovie && user.FavoriteMovie.includes(movie.id)) {
+            setIsFavorite(true);
+        }
+    }, [movie.id]);
 
+    const handleAddToFav = (movieId) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('token');
 
-export const MovieCard = ({ movie, onMovieClick }) => {
-    const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    const addFav = () => {
-        fetch(`https://movie-api-xkkk.onrender.com/users/${user.Username}/${movie._id}`, {
-            "method": "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
+        fetch(
+            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}/movie/${movieId}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
             }
-        })
+        )
             .then((response) => response.json())
-            .then(movies => {
-                alert("Movie added")
+            .then((updatedUser) => {
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                setIsFavorite(true);
+                alert('Movie added to your favorite list successfully!');
             })
-            .catch(e => console.log(e))
-    }
-    const removeFav = () => {
-        fetch(`https://movie-api-xkkk.onrender.com/users/${user.Username}/${movie._id}`, {
-            "method": "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
+            .catch((error) => console.error('Error adding favorite movies:', error));
+    };
+
+    const handleRemoveFromFav = (movieId) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('token');
+
+        fetch(
+            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}/movie/${movieId}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
             }
-        })
+        )
             .then((response) => response.json())
-            .then(movies => {
-                alert("Movie deleted")
+            .then((updatedUser) => {
+                updateAction(updatedUser);
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                setIsFavorite(false);
+                alert('Movie removed from your favorite list successfully!');
             })
-            .catch(e => console.log(e))
-    }
+            .catch((error) =>
+                console.error('Error removing favorite movies:', error)
+            );
+    };
 
     return (
-
-        /*  <div
-              className="movie-card"
-              onClick={() => {
-                  onMovieClick(movie);
-              }}
-          >
-              <div className='movie-card__header'>
-                  <CustomImage src={movie.imageUrl} alt={"Movie Poster"} />
-              </div>
-              <h3 className='movie-card__title'>{movie.title}</h3>
-              <p className='movie-card__description'>{movie.description}</p>
-              <p className='movie-card__genre'>Genre</p>
-          </div>
-          */
-
-        <Card>
-            <Card.Img variant="top" src={movie.imageUrl} />
-            <Card.Body>
-                <Card.Title>{movie.title}</Card.Title>
-                <Card.Text>{movie.director.Name}</Card.Text>
-                <Link to={`/movies/${movie._id}`}>
-                    Open
+        <Card className="h-100" xs={12} sm={6} m={4}>
+            <Card.Img variant="top" src={movie.imgURL} />
+            <Card.Body className="d-flex flex-column">
+                <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+                    <Card.Title>{movie.Title}</Card.Title>
                 </Link>
-                <Button
-                    onClick={addFav}>
-                    Add to Favorites
-                </Button>
-                <Button onClick={removeFav}>
-                    Remove from Favorites
-                </Button>
-
-
+                <Card.Text>{movie.Year}</Card.Text>
+                <div className="mt-auto">
+                    {isFavorite ? (
+                        <Button
+                            className="btn btn-warning"
+                            onClick={() => handleRemoveFromFav(movie.id)}
+                        >
+                            Remove from Favorites
+                        </Button>
+                    ) : (
+                        <Button
+                            className="btn back-button"
+                            onClick={() => handleAddToFav(movie.id)}
+                        >
+                            Add to Favorites
+                        </Button>
+                    )}
+                </div>
             </Card.Body>
         </Card>
-
     );
 };
 
-
 MovieCard.propTypes = {
-    movie: PropType.shape({
-        title: PropType.string.isRequired,
-        Description: PropTypes.string.isRequired,
-        Genre: PropTypes.arrayOf(PropTypes.object),
-        Director: PropTypes.arrayOf(PropTypes.object),
-        imageUrl: PropType.string.isRequired,
-        Featured: PropTypes.bool
+    movie: PropTypes.shape({
+        Title: PropTypes.string.isRequired,
+        imgURL: PropTypes.string.isRequired,
+        Director: PropTypes.object.isRequired,
+        Year: PropTypes.number.isRequired,
+        Genre: PropTypes.object.isRequired,
+        id: PropTypes.string.isRequired,
     }).isRequired,
-    onMovieClick: PropTypes.func.isRequired
 };
 
-
-/*
-
-
-      <div
-          onClick={() => {
-              onMovieClick(movie);
-          }}
-      >
-          {movie.title}
-      </div>
-  );
-};
-*/
+export default MovieCard;
