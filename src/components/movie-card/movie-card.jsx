@@ -69,7 +69,7 @@ export const MovieCard = ({ movie, updateAction }) => {
                 <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
                     <Card.Title>{movie.Title}</Card.Title>
                 </Link>
-                <Card.Text>{movie.Year}</Card.Text>
+
                 <div className="mt-auto">
                     {isFavorite ? (
                         <Button
