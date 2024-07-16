@@ -18,7 +18,7 @@ export const MovieCard = ({ movie, updateAction }) => {
         const token = localStorage.getItem('token');
 
         fetch(
-            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}/movie/${movieId}`,
+            'https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}/movie/${movieId}',
             {
                 method: 'POST',
                 headers: {
@@ -41,7 +41,7 @@ export const MovieCard = ({ movie, updateAction }) => {
         const token = localStorage.getItem('token');
 
         fetch(
-            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}/movie/${movieId}`,
+            'https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}/movie/${movieId}',
             {
                 method: 'DELETE',
                 headers: {

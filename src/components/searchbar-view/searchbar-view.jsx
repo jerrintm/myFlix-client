@@ -10,7 +10,7 @@ export const SearchBar = ({ token }) => {
 
     useEffect(() => {
         fetch('https://myflix12-47ea37fcfdd6.herokuapp.com/movies', {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: 'Bearer ${token}' },
         })
             .then((response) => response.json())
             .then((data) => {

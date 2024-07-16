@@ -23,7 +23,7 @@ export const MainView = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user._id}`, {
+        fetch('https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user._id}', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
