@@ -22,7 +22,7 @@ export const ProfileView = () => {
     const fetchFavMovies = () => {
         const currentUser = JSON.parse(localStorage.getItem('user'));
         fetch('https://myflix12-47ea37fcfdd6.herokuapp.com/movies', {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: 'Bearer ${token}' },
         })
             .then((response) => response.json())
             .then((data) => {
@@ -122,7 +122,7 @@ export const ProfileView = () => {
             {
                 method: 'DELETE',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: 'Bearer ${token}',
                 },
             }
         )
@@ -133,7 +133,7 @@ export const ProfileView = () => {
                     localStorage.clear();
                     window.location.reload();
 
-                    console.log(`${user.Username} was deleted.`);
+                    console.log('${user.Username} was deleted.');
                 } else {
                     throw new Error('Failed to deregister user');
                 }
