@@ -23,7 +23,7 @@ export const MainView = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user._id}`, {
+        fetch('https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user._id}', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,16 +51,16 @@ export const MainView = () => {
                     const moviesFromApi = data.map((movie) => {
                         return {
                             id: movie._id,
-                            title: movie.title,
-                            imageUrl: movie.imageUrl,
-                            description: movie.description,
-                            genre: {
-                                name: movie.genre.name,
+                            Title: movie.Title,
+                            imgURL: movie.imgURL,
+                            Description: movie.Description,
+                            Genre: {
+                                Name: movie.Genre.Name,
                             },
-                            director: {
-                                name: movie.director.name,
-                            }
-                            //,                            Year: movie.Year,
+                            Director: {
+                                Name: movie.Director.Name,
+                            },
+                            Year: movie.Year,
                         };
                     });
                     setMovies(moviesFromApi);
@@ -143,7 +143,7 @@ export const MainView = () => {
                     />
 
                     <Route
-                        path="/movies/:MovieID"
+                        path="/movies/:movieId"
                         element={
                             <>
                                 {!user ? (

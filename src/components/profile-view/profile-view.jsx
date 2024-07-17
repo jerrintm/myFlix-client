@@ -37,8 +37,8 @@ export const ProfileView = () => {
                         },
                         Director: {
                             Name: movie.Director.Name,
-                        }
-                        //                     ,                        Year: movie.Year,
+                        },
+                        Year: movie.Year,
                     };
                 });
                 setFavMovies(
@@ -93,7 +93,7 @@ export const ProfileView = () => {
         };
 
         fetch(
-            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}`,
+            'https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}',
             {
                 method: 'PUT',
                 headers: {
@@ -118,7 +118,7 @@ export const ProfileView = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         const token = localStorage.getItem('token');
         fetch(
-            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}`,
+            'https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}',
             {
                 method: 'DELETE',
                 headers: {

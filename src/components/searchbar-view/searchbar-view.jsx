@@ -24,8 +24,8 @@ export const SearchBar = ({ token }) => {
                     },
                     Director: {
                         Name: movie.Director.Name,
-                    }
-                    //              ,                    Year: movie.Year,
+                    },
+                    Year: movie.Year,
                 }));
                 setMovies(moviesFromApi);
                 setFilteredMovies(moviesFromApi);
