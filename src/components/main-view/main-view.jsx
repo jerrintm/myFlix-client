@@ -17,6 +17,7 @@ export const MainView = () => {
     const [token, setToken] = useState(storedToken ? storedToken : null);
     const [movies, setMovies] = useState([]);
 
+
     const handleUpdate = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
@@ -49,18 +50,18 @@ export const MainView = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     const moviesFromApi = data.map((movie) => {
+                        console.log(movie)
                         return {
                             id: movie._id,
-                            Title: movie.Title,
-                            imgURL: movie.imgURL,
-                            Description: movie.Description,
+                            Title: movie.title,
+                            imgURL: movie.imageUrl,
+                            Description: movie.description,
                             Genre: {
-                                Name: movie.Genre.Name,
+                                Name: movie.genre.name,
                             },
                             Director: {
-                                Name: movie.Director.Name,
-                            },
-                            Year: movie.Year,
+                                Name: movie.director.Name,
+                            }
                         };
                     });
                     setMovies(moviesFromApi);

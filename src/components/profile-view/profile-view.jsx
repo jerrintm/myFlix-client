@@ -37,8 +37,7 @@ export const ProfileView = () => {
                         },
                         Director: {
                             Name: movie.Director.Name,
-                        },
-                        Year: movie.Year,
+                        }
                     };
                 });
                 setFavMovies(

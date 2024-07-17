@@ -18,7 +18,7 @@ export const MovieCard = ({ movie, updateAction }) => {
         const token = localStorage.getItem('token');
 
         fetch(
-            'https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}/movie/${movieId}',
+            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.username}/movie/${movieId}`,
             {
                 method: 'POST',
                 headers: {
@@ -69,7 +69,7 @@ export const MovieCard = ({ movie, updateAction }) => {
                 <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
                     <Card.Title>{movie.Title}</Card.Title>
                 </Link>
-                <Card.Text>{movie.Year}</Card.Text>
+
                 <div className="mt-auto">
                     {isFavorite ? (
                         <Button
@@ -97,7 +97,6 @@ MovieCard.propTypes = {
         Title: PropTypes.string.isRequired,
         imgURL: PropTypes.string.isRequired,
         Director: PropTypes.object.isRequired,
-        Year: PropTypes.number.isRequired,
         Genre: PropTypes.object.isRequired,
         id: PropTypes.string.isRequired,
     }).isRequired,
