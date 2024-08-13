@@ -169,11 +169,13 @@ export const MainView = () => {
                                     <Col>Please wait, movies are loading...!</Col>
                                 ) : (
                                     <>
-                                        {movies.map((movie) => (
+
+                                        <SearchBar token={token} />
+                                        {/* {movies.map((movie) => (
                                             <Col className="mb-4" key={movie.id} md={3}>
                                                 <MovieCard movie={movie} updateAction={setUser} />
                                             </Col>
-                                        ))}
+                                        ))} */}
                                         <Col md={12}>
                                             <button
                                                 onClick={() => {
