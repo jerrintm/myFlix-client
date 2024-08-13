@@ -16,14 +16,14 @@ export const SearchBar = ({ token }) => {
             .then((data) => {
                 const moviesFromApi = data.map((movie) => ({
                     id: movie._id,
-                    Title: movie.Title,
-                    imgURL: movie.imgURL,
-                    Description: movie.Description,
+                    Title: movie.title,
+                    imgURL: movie.imageUrl,
+                    Description: movie.description,
                     Genre: {
-                        Name: movie.Genre.Name,
+                        Name: movie.genre.name,
                     },
                     Director: {
-                        Name: movie.Director.Name,
+                        Name: movie.director.Name,
                     }
                 }));
                 setMovies(moviesFromApi);
@@ -32,12 +32,16 @@ export const SearchBar = ({ token }) => {
     }, [token]);
 
     const genres = [
+        'Action',
+        'Crime',
+        'Drama',
+        'Adventure',
         'Sci-Fi',
         'Children',
         'Fantasy',
         'Comedy',
-        'Thriller',
-        'Action',
+        'Thriller'
+
     ];
     const handleChange = (e) => {
         const input = e.target.value;
