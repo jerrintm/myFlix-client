@@ -29,14 +29,14 @@ export const ProfileView = () => {
                 const moviesFromApi = data.map((movie) => {
                     return {
                         id: movie._id,
-                        Title: movie.Title,
-                        imgURL: movie.imgURL,
-                        Description: movie.Description,
+                        Title: movie.title,
+                        imgURL: movie.imageUrl,
+                        Description: movie.description,
                         Genre: {
-                            Name: movie.Genre.Name,
+                            Name: movie.genre.name,
                         },
                         Director: {
-                            Name: movie.Director.Name,
+                            Name: movie.director.Name,
                         }
                     };
                 });

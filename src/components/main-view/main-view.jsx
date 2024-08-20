@@ -53,14 +53,14 @@ export const MainView = () => {
                         console.log(movie)
                         return {
                             id: movie._id,
-                            Title: movie.title,
+                            title: movie.title,
                             imgURL: movie.imageUrl,
-                            Description: movie.description,
-                            Genre: {
-                                Name: movie.genre.name,
+                            description: movie.description,
+                            genre: {
+                                name: movie.genre.name,
                             },
-                            Director: {
-                                Name: movie.director.Name,
+                            director: {
+                                name: movie.director.Name,
                             }
                         };
                     });

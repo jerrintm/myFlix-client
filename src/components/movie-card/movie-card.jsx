@@ -8,7 +8,7 @@ export const MovieCard = ({ movie, updateAction }) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
-        if (user && user.FavoriteMovie && user.FavoriteMovie.includes(movie.id)) {
+        if (user && user.favorite_movies && user.favorite_movies.includes(movie.id)) {
             setIsFavorite(true);
         }
     }, [movie.id]);
@@ -18,7 +18,7 @@ export const MovieCard = ({ movie, updateAction }) => {
         const token = localStorage.getItem('token');
 
         fetch(
-            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.username}/movie/${movieId}`,
+            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.username}/movies/${movieId}`,
             {
                 method: 'POST',
                 headers: {
@@ -41,7 +41,7 @@ export const MovieCard = ({ movie, updateAction }) => {
         const token = localStorage.getItem('token');
 
         fetch(
-            'https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}/movie/${movieId}',
+            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.username}/movies/${movieId}`,
             {
                 method: 'DELETE',
                 headers: {
@@ -67,7 +67,7 @@ export const MovieCard = ({ movie, updateAction }) => {
             <Card.Img variant="top" src={movie.imgURL} />
             <Card.Body className="d-flex flex-column">
                 <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-                    <Card.Title>{movie.Title}</Card.Title>
+                    <Card.Title>{movie.title}</Card.Title>
                 </Link>
 
                 <div className="mt-auto">
@@ -94,10 +94,10 @@ export const MovieCard = ({ movie, updateAction }) => {
 
 MovieCard.propTypes = {
     movie: PropTypes.shape({
-        Title: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         imgURL: PropTypes.string.isRequired,
-        Director: PropTypes.object.isRequired,
-        Genre: PropTypes.object.isRequired,
+        director: PropTypes.object.isRequired,
+        genre: PropTypes.object.isRequired,
         id: PropTypes.string.isRequired,
     }).isRequired,
 };

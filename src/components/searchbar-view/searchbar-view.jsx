@@ -16,14 +16,14 @@ export const SearchBar = ({ token }) => {
             .then((data) => {
                 const moviesFromApi = data.map((movie) => ({
                     id: movie._id,
-                    Title: movie.title,
+                    title: movie.title,
                     imgURL: movie.imageUrl,
-                    Description: movie.description,
-                    Genre: {
-                        Name: movie.genre.name,
+                    description: movie.description,
+                    genre: {
+                        name: movie.genre.name,
                     },
-                    Director: {
-                        Name: movie.director.Name,
+                    director: {
+                        name: movie.director.Name,
                     }
                 }));
                 setMovies(moviesFromApi);
@@ -61,9 +61,9 @@ export const SearchBar = ({ token }) => {
         const lowercasedInput = input.toLowerCase();
         const filtered = movies.filter((movie) => {
             const matchesSearchInput =
-                movie.Title.toLowerCase().includes(lowercasedInput);
+                movie.title.toLowerCase().includes(lowercasedInput);
             const matchesGenre =
-                genres.length === 0 || genres.includes(movie.Genre.Name);
+                genres.length === 0 || genres.includes(movie.genre.name);
             return matchesSearchInput && matchesGenre;
         });
         setFilteredMovies(filtered);
