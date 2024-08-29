@@ -20,28 +20,30 @@ export const ProfileView = () => {
     };
 
     const fetchFavMovies = () => {
+        //console.log('Calling fetchfavmovies...');
         const currentUser = JSON.parse(localStorage.getItem('user'));
         fetch('https://myflix12-47ea37fcfdd6.herokuapp.com/movies', {
-            headers: { Authorization: 'Bearer ${token}' },
+            headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())
             .then((data) => {
                 const moviesFromApi = data.map((movie) => {
                     return {
                         id: movie._id,
-                        Title: movie.title,
+                        title: movie.title,
                         imgURL: movie.imageUrl,
-                        Description: movie.description,
-                        Genre: {
-                            Name: movie.genre.name,
+                        description: movie.description,
+                        genre: {
+                            name: movie.genre.name,
                         },
-                        Director: {
-                            Name: movie.director.Name,
+                        director: {
+                            name: movie.director.Name,
                         }
                     };
                 });
+                //console.log(currentUser)
                 setFavMovies(
-                    moviesFromApi.filter((m) => currentUser.FavoriteMovie.includes(m.id))
+                    moviesFromApi.filter((m) => currentUser.favorite_movies.includes(m.id))
                 );
             });
     };
@@ -70,7 +72,7 @@ export const ProfileView = () => {
     }, [token]);
 
     useEffect(() => {
-        console.log('FAV MOVIES UPDATED', favMovies);
+        //console.log('FAV MOVIES UPDATED', favMovies);
     }, [favMovies]);
 
     const handleUpdate = (e) => {
@@ -132,7 +134,7 @@ export const ProfileView = () => {
                     localStorage.clear();
                     window.location.reload();
 
-                    console.log('${user.Username} was deleted.');
+                    //console.log('${user.Username} was deleted.');
                 } else {
                     throw new Error('Failed to deregister user');
                 }
@@ -141,7 +143,7 @@ export const ProfileView = () => {
                 console.error('Error deregistering user:', error);
             });
     };
-
+    console.log('User profile test', user)
     return (
         <Container>
             {user && (
@@ -150,9 +152,9 @@ export const ProfileView = () => {
                         <Card>
                             <Card.Body>
                                 <UserInfo
-                                    Username={user.Username}
-                                    Email={user.Email}
-                                    Birthday={user.Birthday}
+                                    Username={user.username}
+                                    Email={user.email}
+                                    Birthday={user.birthday}
                                 />
                             </Card.Body>
                         </Card>
@@ -167,7 +169,7 @@ export const ProfileView = () => {
                                         <Form.Control
                                             type="text"
                                             name="Username"
-                                            value={formData.Username}
+                                            value={formData.username}
                                             onChange={(e) => handleUpdate(e)}
                                             required
                                             minLength="5"
@@ -190,7 +192,7 @@ export const ProfileView = () => {
                                         <Form.Control
                                             type="email"
                                             name="Email"
-                                            value={formData.Email}
+                                            value={formData.email}
                                             onChange={(e) => handleUpdate(e)}
                                             required
                                             placeholder="please enter your email address"

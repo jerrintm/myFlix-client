@@ -52,9 +52,13 @@ export const MovieCard = ({ movie, updateAction }) => {
         )
             .then((response) => response.json())
             .then((updatedUser) => {
-                updateAction(updatedUser);
+                console.log("updatedUser", updatedUser)
+                //updateAction(updatedUser);
                 localStorage.setItem('user', JSON.stringify(updatedUser));
                 setIsFavorite(false);
+                if (updateAction) {
+                    updateAction();
+                }
                 alert('Movie removed from your favorite list successfully!');
             })
             .catch((error) =>
