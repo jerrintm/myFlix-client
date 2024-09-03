@@ -8,9 +8,9 @@ export const ProfileView = () => {
     const [user, setUser] = useState(null);
     const [favMovies, setFavMovies] = useState([]);
     const [formData, setFormData] = useState({
-        Username: '',
-        Password: '',
-        Email: '',
+        username: '',
+        password: '',
+        email: '',
     });
     const storedToken = localStorage.getItem('token');
     const [token, setToken] = useState(storedToken ? storedToken : null);
@@ -58,8 +58,8 @@ export const ProfileView = () => {
                 const foundUser = users.find((u) => u._id === currentUser._id);
                 const updatedFormData = {
                     ...formData,
-                    Username: foundUser.Username,
-                    Email: foundUser.Email,
+                    username: foundUser.username,
+                    email: foundUser.email,
                     // We do not add password because we don't want the hashed value to be included in the form
                 };
                 setUser(foundUser);
@@ -86,7 +86,7 @@ export const ProfileView = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Exclude the password from the user object when spreading it into updatedFormData
-        const { Password, ...userWithoutPassword } = user;
+        const { password, ...userWithoutPassword } = user;
         // Merge the existing formData state with additional user data
         const updatedFormData = {
             ...userWithoutPassword,
@@ -94,7 +94,7 @@ export const ProfileView = () => {
         };
 
         fetch(
-            'https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}',
+            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.username}`,
             {
                 method: 'PUT',
                 headers: {
@@ -119,11 +119,11 @@ export const ProfileView = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         const token = localStorage.getItem('token');
         fetch(
-            'https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.Username}',
+            `https://myflix12-47ea37fcfdd6.herokuapp.com/users/${user.username}`,
             {
                 method: 'DELETE',
                 headers: {
-                    Authorization: 'Bearer ${token}',
+                    Authorization: `Bearer ${token}`,
                 },
             }
         )
@@ -143,7 +143,7 @@ export const ProfileView = () => {
                 console.error('Error deregistering user:', error);
             });
     };
-    console.log('User profile test', user)
+    console.log('User profile test', formData)
     return (
         <Container>
             {user && (
@@ -168,7 +168,7 @@ export const ProfileView = () => {
                                         <Form.Label>Username:</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            name="Username"
+                                            name="username"
                                             value={formData.username}
                                             onChange={(e) => handleUpdate(e)}
                                             required
@@ -180,7 +180,7 @@ export const ProfileView = () => {
                                         <Form.Label>Password:</Form.Label>
                                         <Form.Control
                                             type="password"
-                                            name="Password"
+                                            name="password"
                                             onChange={(e) => handleUpdate(e)}
                                             required
                                             minLength="5"
@@ -191,7 +191,7 @@ export const ProfileView = () => {
                                         <Form.Label>Email Address:</Form.Label>
                                         <Form.Control
                                             type="email"
-                                            name="Email"
+                                            name="email"
                                             value={formData.email}
                                             onChange={(e) => handleUpdate(e)}
                                             required
