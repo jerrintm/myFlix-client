@@ -99,7 +99,7 @@ export const MovieCard = ({ movie, updateAction }) => {
 MovieCard.propTypes = {
     movie: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        imgURL: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string.isRequired,
         director: PropTypes.object.isRequired,
         genre: PropTypes.object.isRequired,
         id: PropTypes.string.isRequired,
