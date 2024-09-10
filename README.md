@@ -2,3 +2,6 @@
 Task 1.1 ---
 In this Exercise, you learned the component-based architecture of React. You also explored the ins and outs of the build process, beginning with a look at some operations that are common to all build processes, including transpilation, minification, bundling, and auto-prefixing. You then learned how parts of the build process can be expedited using individual tools, notably Babel for transpiling, before examining what the build process would look like for an app such as myFlix.
 Next, you took an in-depth look at the web app bundler Parcel, and how to configure it to build your myFlix app.
+
+
+The myflix app code will sync with the cloud instance(Netlify) when the changes are synced Github in the cloud.

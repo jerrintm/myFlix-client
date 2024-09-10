@@ -65,7 +65,7 @@ export const MovieCard = ({ movie, updateAction }) => {
                 console.error('Error removing favorite movies:', error)
             );
     };
-
+    console.log('image URL', imageUrl)
     return (
         <Card className="h-100" xs={12} sm={6} m={4}>
             <Card.Img variant="top" src={movie.imageUrl} />
