@@ -65,10 +65,10 @@ export const MovieCard = ({ movie, updateAction }) => {
                 console.error('Error removing favorite movies:', error)
             );
     };
-    console.log('image URL', imageUrl)
+    console.log('image URL', movie.imgURL)
     return (
         <Card className="h-100" xs={12} sm={6} m={4}>
-            <Card.Img variant="top" src={movie.imageUrl} />
+            <Card.Img variant="top" src={movie.imgURL} />
             <Card.Body className="d-flex flex-column">
                 <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
                     <Card.Title>{movie.title}</Card.Title>
@@ -99,7 +99,7 @@ export const MovieCard = ({ movie, updateAction }) => {
 MovieCard.propTypes = {
     movie: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        imageUrl: PropTypes.string.isRequired,
+        imgURL: PropTypes.string.isRequired,
         director: PropTypes.object.isRequired,
         genre: PropTypes.object.isRequired,
         id: PropTypes.string.isRequired,
