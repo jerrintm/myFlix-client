@@ -68,7 +68,7 @@ export const MovieCard = ({ movie, updateAction }) => {
 
     return (
         <Card className="h-100" xs={12} sm={6} m={4}>
-            <Card.Img variant="top" src={movie.imgURL} />
+            <Card.Img variant="top" src={movie.imageUrl} />
             <Card.Body className="d-flex flex-column">
                 <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
                     <Card.Title>{movie.title}</Card.Title>
