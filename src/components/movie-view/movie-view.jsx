@@ -6,12 +6,12 @@ export const MovieView = ({ movies }) => {
     const { movieId } = useParams();
 
     const movie = movies.find((m) => m.id === movieId);
-
+//console.log(movie)
     return (
         <div>
             <div>
                 <img
-                    src={movie.imageUrl}
+                    src={movie.imgURL}
                     alt={movie.title}
                     className="movie-image w-100" />
             </div>
