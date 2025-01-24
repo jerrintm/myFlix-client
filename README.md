@@ -1,4 +1,32 @@
+# myFlix-client
 
-Task 1.1 ---
-In this Exercise, you learned the component-based architecture of React. You also explored the ins and outs of the build process, beginning with a look at some operations that are common to all build processes, including transpilation, minification, bundling, and auto-prefixing. You then learned how parts of the build process can be expedited using individual tools, notably Babel for transpiling, before examining what the build process would look like for an app such as myFlix.
-Next, you took an in-depth look at the web app bundler Parcel, and how to configure it to build your myFlix app.
+## Project Overview:
+The myFlix-client is a front web application using React that will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their
+personal information, and create a list of their favorite movies.
+
+## Installations
+Node.js and npm (Node Package Manager)
+1.  install parcel
+    `npm install -g parcel`
+2.  Install React and React Dom
+    `npm install --save react react-dom`
+3.  Create components
+    main-view, movie-view & movie-card, login-view, signup-view
+5.  Add hooks
+    useState, useEffect    
+6.  Install bootstrap and react-bootstrap
+   ` npm install react-bootstrap bootstrap`
+7.  Install react-router and react-router-dom
+    `npm install react-router react-router-dom --save`
+9.  Install parcel as a local developer dependency
+    `npm install --save-dev parcel@2.12.0`
+
+## Run the application
+`parcel src/index.html`
+Parcel command is used to build theapplication which will transpiles JSX and SCSS files. And built the deployment code.
+
+## Deployment and hosting on Netlify
+- Install Parcel as a local developer dependency inside your project
+`npm install --save-dev  parcel@2.11.0`
+
+ 
